@@ -15,7 +15,11 @@ from .common import is_keras_tensor
 from .common import legacy_weight_ordering
 from .common import set_legacy_weight_ordering
 
-_keras_base_dir = os.path.expanduser('~')
+if 'KERAS_BASE_DIR' in os.environ:
+    _keras_base_dir = os.environ['KERAS_BASE_DIR']
+else:
+    _keras_base_dir = os.path.expanduser('~')
+
 if not os.access(_keras_base_dir, os.W_OK):
     _keras_base_dir = '/tmp'
 
